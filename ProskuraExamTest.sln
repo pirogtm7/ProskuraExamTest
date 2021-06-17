@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProskuraExamTest", "ProskuraExamTest\ProskuraExamTest.csproj", "{CA2E3165-4185-4C32-8FAB-F1005B58F941}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookClassLibrary", "BookClassLibrary\BookClassLibrary.csproj", "{CA1A5F9B-738B-42F3-A0D6-DB6BCEF917BE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA2E3165-4185-4C32-8FAB-F1005B58F941}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA2E3165-4185-4C32-8FAB-F1005B58F941}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA2E3165-4185-4C32-8FAB-F1005B58F941}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA2E3165-4185-4C32-8FAB-F1005B58F941}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA1A5F9B-738B-42F3-A0D6-DB6BCEF917BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA1A5F9B-738B-42F3-A0D6-DB6BCEF917BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA1A5F9B-738B-42F3-A0D6-DB6BCEF917BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA1A5F9B-738B-42F3-A0D6-DB6BCEF917BE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {72A85D29-68F5-49AD-9AC3-A2D7A8A7C9C2}
+	EndGlobalSection
+EndGlobal
