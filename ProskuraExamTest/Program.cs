@@ -9,7 +9,7 @@ namespace ProskuraExamTest
 		{
 			Startup startup = new Startup();
 
-			startup.Start(startup.Count, (++startup).Count, (++startup).Count);
+			startup.Start();
 			Console.ReadKey();
 
 			startup.UpcastDowncastExample();
@@ -18,14 +18,7 @@ namespace ProskuraExamTest
 			startup.DelegatesCall();
 			Console.ReadKey();
 
-			try
-			{
-				startup++;
-			}
-			catch (WrongIdException)
-			{
-				Console.WriteLine("Cannot create id 130");
-			}
+			startup.CustomExceptionDisplay();
 			Console.ReadKey();
 		}
 

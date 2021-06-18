@@ -6,27 +6,19 @@ namespace BookClassLibrary
 {
 	public class Startup
 	{
-		private int _count = 100;
 		private Card _card;
+		private IdGenerator _generator;
 
-		public int Count { get => _count; set => _count = value; }
 		public Card Card { get => _card; set => _card = value; }
+		public IdGenerator Generator { get => _generator; set => _generator = value; }
 
-		public static Startup operator ++(Startup c)
+		public void Start()
 		{
-			Startup startup = new Startup { Count = c.Count + 10 };
-			if (startup.Count == 130)
-			{
-				throw new WrongIdException();
-			}
-			return startup;
-		}
+			Generator = new IdGenerator();
 
-		public void Start(int cardId, int readerId, int bookId)
-		{
 			//razvorachivanie systemi
-			Card = new Card(cardId, new Reader(readerId, "Ricardo Milos"), 
-				new Book { Id = bookId, Name = "Put Samuraya", PageAmount = 669, State = "Perfect"});
+			Card = new Card(Generator.Count, new Reader((++Generator).Count, "Ricardo Milos"), 
+				new Book { Id = (++Generator).Count, Name = "Put Samuraya", PageAmount = 669, State = "Perfect"});
 
 			Console.WriteLine($"Card details: id - {Card.Id}, return date - {Card.ReturnDate}");
 			Console.WriteLine($"Reader details: id - {Card.Reader.Id}, name - {Card.Reader.Name}, birth date - {Card.Reader.BirthDate}");
@@ -42,11 +34,11 @@ namespace BookClassLibrary
 		{
 			//upcast downcast
 
-			Reader reader = new Reader();
-			reader.UpcastDowncastTest();
+			//Reader reader = new Reader();
+			Card.Reader.UpcastDowncastTest();
 
 			//upcast
-			Person personUp = reader;
+			Person personUp = Card.Reader;
 			personUp.UpcastDowncastTest();
 
 			//downcast
@@ -65,51 +57,60 @@ namespace BookClassLibrary
 			}
 		}
 
-		//Делегат, що представляє подію
+		public delegate void DelegateWithNoParamsOrReturnValue();
+		public delegate void DelegateWithParam(string msg);
 		public delegate void EventDelegate(string msg);
 
-		//Об'являємо подію
+		//event declaration
 		public event EventDelegate Notify;
 
 		public void TestMethod()
 		{
-			//Викликаємо подію
+			//call event
 			Notify?.Invoke("This is message for the event from test method");
+		}
+
+		//event handler 
+		private static void EventMsg(string msg)
+		{
+			Console.WriteLine(msg);
 		}
 
 		public void DelegatesCall()
 		{
-			//Анонімний метод
+			//create delegate instances and
+			//notify first delegate with anonymous method
 			DelegateWithNoParamsOrReturnValue delegateWithAnonymousMethod = delegate () {
 				Console.WriteLine("This is message for delegate with anonymous method");
 			};
-			//Лямбда-оператор та лямбда-вираз
+			//notify next delegate with anonymous method even easier by using lambda-expression
 			DelegateWithParam delegateWithLambdaOperatorAndExpression = (x) =>
 				Console.WriteLine("This is message for delegate with parameter: " + x);
 
-
-			//Викликаємо методи, сповіщені з делегатами
+			//call delegates
 			delegateWithAnonymousMethod();
 
 			string msg = "Parameter for Lambda expression";
 			delegateWithLambdaOperatorAndExpression(msg);
 
-			//Створюємо екземпляр класу, що викликає подію
-			//Додаємо обробник подій EventMsg
+			//Startup instance is already created
+			//add EventMsg event handler
 			Notify += EventMsg;
-			//Викликаємо метод, що викликає подію
+			//call method that calls event
 			TestMethod();
 		}
 
-		//Делегат без параметрів та повертаємого значення
-		public delegate void DelegateWithNoParamsOrReturnValue();
-
-		//Делегат з параметром
-		public delegate void DelegateWithParam(string msg);
-
-		private static void EventMsg(string msg)
+		public void CustomExceptionDisplay()
 		{
-			Console.WriteLine(msg);
+			try
+			{
+				Generator++;
+			}
+			catch (WrongIdException)
+			{
+				Console.WriteLine("Cannot create id 130");
+			}
 		}
+
 	}
 }
